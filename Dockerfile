@@ -38,8 +38,6 @@ RUN chown -R nginx:nginx /usr/share/nginx/html && \
 
 EXPOSE 80
 
-# Fixed Health check - gives Nginx 40 seconds to start, uses the /health endpoint
-HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost:80/health || exit 1
+# NO HEALTHCHECK - Let Docker Swarm handle it
 
 CMD ["nginx", "-g", "daemon off;"]
